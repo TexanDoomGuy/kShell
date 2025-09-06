@@ -1,6 +1,5 @@
 package commands
 
-import commands.*
 import kotlin.system.exitProcess
 
 class Simples {
