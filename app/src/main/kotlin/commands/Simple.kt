@@ -6,7 +6,7 @@ import kotlin.system.exitProcess
 /**
  * Simple, builtin commands that don't fit having their own class
  */
-class Simple {
+public class Simple {
     fun exit(statusCode: Int = 0) {
         println("Exiting...")
         exitProcess(statusCode)

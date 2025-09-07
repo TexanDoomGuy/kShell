@@ -5,7 +5,7 @@ import path.pathInit
 /**
  * run a command from a user input
  */
-fun runCommand(command: String) {
+private fun runCommand(command: String) {
     val splitCommand = command.split(" ")
     val functionName = splitCommand[0]
     val args = splitCommand.drop(1)
@@ -22,7 +22,7 @@ fun runCommand(command: String) {
  * Returns true if the command is invalid, and prints an error message.
  * If the input is empty, it is also considered invalid, but without an error message.
  */
-fun invalidCommand(command: String): Boolean {
+private fun invalidCommand(command: String): Boolean {
     if (command.isEmpty()) {return true} // Ignore empty commands
     val splitCommand = command.split(" ")
     val functionName = splitCommand[0]

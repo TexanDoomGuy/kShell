@@ -1,4 +1,5 @@
 package commands
+
 data class Command(
     val description: String,
     val args: List<String>,
@@ -9,7 +10,7 @@ data class Command(
 /**
  * A map of all built-in commands.
  */
-val commands: Map<String, Command> = mapOf(
+public val commands: Map<String, Command> = mapOf(
     "exit" to Command(
         description = "Exit the program with a specified status code (defaults to 0).",
         args = listOf("statusCode"),
