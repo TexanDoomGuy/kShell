@@ -1,4 +1,9 @@
-![KYS logo](readmeFiles/KYS2.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="readmeFiles/KYS2Dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="readmeFiles/KYS2.png">
+  <img alt="KYS Logo" src="readmeFiles/KYS2Dark.png">
+</picture>
+
 # KYS
 KYS (or somtimes kShell) is a simple shell similar to bash written in Kotlin.
 
