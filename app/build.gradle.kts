@@ -18,3 +18,8 @@ application {
     // Define the main class for the application.
     mainClass = "MainKt"
 }
+
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
