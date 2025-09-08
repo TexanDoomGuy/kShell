@@ -1,26 +1,40 @@
 import commands.*
 import path.*
 
+private const val ARG_KEY: String = "arg"
+private const val DEFAULT_KEY: String = "default"
+
+
 /**
  * run a command from a user input
  */
+
+private fun tokenize(input: String): Pair<String, List<String>>? {
+    val tokens = input.trim().split(Regex("\\s+")).filter { it.isNotEmpty() }
+    if (tokens.isEmpty()) return null
+    val commandName = tokens.first()
+    val args = if (tokens.size > 1) tokens.drop(1) else emptyList()
+    return commandName to args
+}
 private fun runCommand(command: String) {
-    val splitCommand = command.split(" ")
-    val functionName = splitCommand[0]
-    val args = splitCommand.drop(1)
-    val commandInfo = commands[functionName] ?: return
+    val (commandName, args) = tokenize(command) ?: return
+    val commandInfo = commands[commandName] ?: return
+
+    val defaultArg = commandInfo.args[DEFAULT_KEY]
+    val argName = commandInfo.args[ARG_KEY]
 
     if (args.isEmpty()) {
-        // is the arg optional?
-        if (commandInfo.args["default"] != null) {
-            commandInfo.action(commandInfo.args["default"]?.let { listOf(it) } ?: emptyList())
+        if (defaultArg != null) {
+            commandInfo.action(listOf(defaultArg))
             return
         }
-        println("Usage: $functionName ${commandInfo.args["arg"]}")
+        println("Usage: $commandName ${argName ?: ""}".trim())
         return
     }
+
     commandInfo.action(args)
 }
+
 
 /**
  * Returns true if the command is invalid, and prints an error message.
@@ -37,6 +51,7 @@ private fun invalidCommand(command: String): Boolean {
     return false
 }
 
+
 fun main() {
     println("Setting up...")
     println("Scanned ${pathFiles.size} files in ${pathInit().size} paths.")
@@ -50,3 +65,4 @@ fun main() {
         runCommand(input)
     } while (true)
 }
+
