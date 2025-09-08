@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownTarget -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/TexanDoomGuy/kShell/blob/main/readmeFiles/KYS2Dark.png?raw=true">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/TexanDoomGuy/kShell/blob/main/readmeFiles/KYS2.png?raw=true">

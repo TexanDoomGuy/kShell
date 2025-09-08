@@ -1,6 +1,5 @@
 import commands.*
-import path.pathFiles
-import path.pathInit
+import path.*
 
 /**
  * run a command from a user input
@@ -11,8 +10,13 @@ private fun runCommand(command: String) {
     val args = splitCommand.drop(1)
     val commandInfo = commands[functionName] ?: return
 
-    if (args.size != commandInfo.args.size) {
-        println("Usage: $functionName ${commandInfo.args.joinToString(" ")}")
+    if (args.isEmpty()) {
+        // is the arg optional?
+        if (commandInfo.args["default"] != null) {
+            commandInfo.action(commandInfo.args["default"]?.let { listOf(it) } ?: emptyList())
+            return
+        }
+        println("Usage: $functionName ${commandInfo.args["arg"]}")
         return
     }
     commandInfo.action(args)
@@ -38,7 +42,7 @@ fun main() {
     println("Scanned ${pathFiles.size} files in ${pathInit().size} paths.")
     var input: String
     do {
-        println("╭─/Temp/Working/Directory")
+        println("╭─${workingDir}")
         print("╰─[${System.getProperty("user.name")}@${System.getProperty("os.name")}]❯ ")
         val line = readlnOrNull() ?: continue
         input = line
