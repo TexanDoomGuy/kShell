@@ -1,5 +1,8 @@
 package path
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.LinkOption
+import java.nio.file.Path
 
 /**
  * Initialize the PATH environment variable into a list of directories.
@@ -41,10 +44,19 @@ fun pathFilesInit(paths: List<String>): Map<String, File> {
     return files
 }
 
-fun isValidDirectory(path: String): Boolean {
-    val dir = File(path)
-    return dir.exists() && dir.isDirectory && dir.canRead()
+fun isValidDirectory(path: String, followSymlinks: Boolean = true): Boolean {
+    if (path.isBlank()) return false
+    val p = Path.of(path)
+
+    val isDir = if (followSymlinks) {
+        Files.isDirectory(p) // follows symlinks
+    } else {
+        Files.isDirectory(p, LinkOption.NOFOLLOW_LINKS)
+    }
+
+    return isDir
 }
+
 
 
 /**

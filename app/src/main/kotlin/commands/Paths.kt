@@ -33,8 +33,12 @@ class Paths {
 
         if (path == "..") {
             workingDir = File(workingDir).parent ?: workingDir
+            resetWorkingDirFiles()
+            return
         }
-        workingDir = if (isValidDirectory(path)) { path }
+        workingDir = if (isValidDirectory(path)) {
+            path
+        }
         else if (isValidDirectory("${workingDir}/$path")) {
             "${workingDir}/$path"
         } else {

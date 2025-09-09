@@ -3,14 +3,9 @@ package commands
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.PrintStream
 
-/**
- * Funcs to test:
- * 2. ls
- * 3. cd
- */
+
 class PathsTest {
     @Test
     fun pwd(){

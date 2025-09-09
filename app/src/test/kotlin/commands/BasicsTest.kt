@@ -27,7 +27,6 @@ class BasicsTest {
         assertEquals("hello world\n", output)
     }
 
-
     @Test
     fun type() {
         val originalOut = System.out
