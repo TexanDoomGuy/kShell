@@ -13,6 +13,7 @@ plugins {
 
 dependencies {
     implementation(project(":utilities"))
+    testImplementation(libs.junit.jupiter)
 }
 
 application {

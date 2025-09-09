@@ -4,6 +4,8 @@ package commands
 data class Command(
     val description: String,
     val args: Map<String, String>,
+    val usage: String =
+        "<${args["arg"]}>${if (args.containsKey("default")) " default: <${args["default"]}>" else ""}",
     val action: (List<String>) -> Unit,
     val type: String = "builtin"
 )
@@ -41,16 +43,28 @@ val commands: Map<String, Command> = mapOf(
     ),
     "pwd" to Command(
         description = "Print the working directory",
-        args = emptyMap(),
+        args = mapOf("arg" to "no args"),
         action = { Paths().pwd() },
         type = ".Paths"
     ),
     "ls" to Command(
         description = "List the contents of the working directory",
-        args = mapOf("arg" to "path", "default" to path.workingDir),
+        args = mapOf("arg" to "path", "default" to "The current working directory"),
         action = { argv ->
             Paths().ls(argv[0])
         },
         type = ".Paths"
+    ),
+    "cd" to Command(
+        description = "Change the working directory",
+        args = mapOf("arg" to "path"),
+        action = { argv -> Paths().cd(argv[0]) }
+    ),
+    "help" to Command(
+        description = "Display help information about a command.",
+        args = mapOf("arg" to "command", "default" to "all"),
+        action = { argv ->
+            Basics().help(argv[0])
+        }
     )
 )

@@ -3,6 +3,8 @@
 
 [versions]
 kotlin-gradle-plugin = "2.1.20"
+junit-jupiter = "5.8.1"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-gradle-plugin" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit-jupiter" }

@@ -54,7 +54,11 @@ private fun invalidCommand(command: String): Boolean {
 
 fun main() {
     println("Setting up...")
-    println("Scanned ${pathFiles.size} files in ${pathInit().size} paths.")
+    resetWorkingDirFiles()
+    println("workingDirFiles set probably.")
+    println("Scanned ${pathFiles.size} files in ${pathInit().size} paths in the PATH env.")
+    println("I don't know why we're scanning for those, the shell does not support running external commands.")
+    println("\n\nWelcome to KYS! Enter 'help' for a list of commands.\n")
     var input: String
     do {
         println("╭─${workingDir}")

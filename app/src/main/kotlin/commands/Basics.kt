@@ -1,6 +1,5 @@
 package commands
 
-import path.*
 import kotlin.system.exitProcess
 
 
@@ -17,40 +16,27 @@ class Basics {
         println(message)
     }
     fun type(command: String) {
-        val cmd = commands[command]?.action ?: {
-            TODO("This is where we implement external commands, but there are none yet!")
-        }
         val type = commands[command]?.type ?: "external"
-        println("$command is a $type shell command")
+        println("$command is a ${if (type != "external") "builtin" else ""}$type shell command")
     }
-}
-class Paths {
-    fun pwd() {
-        println(workingDir)
-    }
-    fun ls(path: String) {
-        if (path != workingDir) {
-            try {
-                val dirFiles = java.io.File(path).list()?.toList() ?: emptyList()
-                println(dirFiles)
-                return
-            } catch (e: Exception) {
-                println("ls: cannot access '$path': No such file or directory")
-                // todo add a flag to print more verbose errors
-                // or do the opposite and add a flag to throw the error instead. That would be comedic.
-                return
+    fun help(command: String) {
+
+        // Maybe sort these by type? We have types.
+        if (command == "all") {
+            println("""
+                |kShell version {${globals.version}}\n
+                |Use help \$command to get help for a specific built-in command
+                |Available built-in commands:""".trimMargin())
+            for ((name, command) in commands) {
+                println("$name: ${command.description}")
             }
         }
-        println(workingDirFiles)
-    }
-
-    fun cd(path: String) {
-//        if
-        // change the working directory to the specified path
-        // handle ~ (home directory), and relative paths
-        // update the workingDir variable
-        // update the wokingDirFiles variable,
-        // this is a stub for now
-        println("cd command is not implemented yet.")
+        else {
+            val cmd = commands[command] ?: run {
+                println("Command $command not found")
+                return
+            }
+            println("$command: ${cmd.description}\nusage: $command ${cmd.usage}")
+        }
     }
 }

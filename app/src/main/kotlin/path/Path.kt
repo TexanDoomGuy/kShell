@@ -41,6 +41,11 @@ fun pathFilesInit(paths: List<String>): Map<String, File> {
     return files
 }
 
+fun isValidDirectory(path: String): Boolean {
+    val dir = File(path)
+    return dir.exists() && dir.isDirectory && dir.canRead()
+}
+
 
 /**
  * A map of filenames to their full paths from the PATH variable.
