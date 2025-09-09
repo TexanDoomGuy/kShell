@@ -36,3 +36,15 @@ tasks.named<JavaExec>("runShadow") {
     standardInput = System.`in`
 
 }
+/* We are using 2 gradle run tasks because I
+ * don't want to support a test task that builds
+ * a shadow jar. If I test then run the shadow
+ * jar, then I'm building 2 jars, which is unnecessary.
+ *
+ * Why don't I just make the test task use the shadow
+ * jar? I don't feel like it.
+ */
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+
+}
