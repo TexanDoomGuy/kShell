@@ -24,7 +24,8 @@ class Basics {
         // Maybe sort these by type? We have types.
         if (command == "all") {
             println("""
-                |kShell version {${globals.version}}\n
+                |kShell version ${globals.version}
+                |
                 |Use help \$command to get help for a specific built-in command
                 |Available built-in commands:""".trimMargin())
             for ((name, command) in commands) {

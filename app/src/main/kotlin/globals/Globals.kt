@@ -1,3 +1,3 @@
 package globals
 
-val version = "0.1-ALPHA"
+val version = "1-ALPHA"
