@@ -46,7 +46,13 @@ fun pathFilesInit(paths: List<String>): Map<String, File> {
 
 fun isValidDirectory(path: String, followSymlinks: Boolean = true): Boolean {
     if (path.isBlank()) return false
-    val p = Path.of(path)
+    val raw = Path.of(path)
+    // Resolve relative paths from the filesystem root (e.g., "src" -> "/src")
+    val p = if (raw.isAbsolute) {
+        raw.normalize()
+    } else {
+        Path.of("/").resolve(raw).normalize()
+    }
 
     val isDir = if (followSymlinks) {
         Files.isDirectory(p) // follows symlinks
@@ -56,8 +62,6 @@ fun isValidDirectory(path: String, followSymlinks: Boolean = true): Boolean {
 
     return isDir
 }
-
-
 
 /**
  * A map of filenames to their full paths from the PATH variable.

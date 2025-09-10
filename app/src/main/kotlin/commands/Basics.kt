@@ -1,5 +1,7 @@
 package commands
 
+import path.pathFiles
+import runExternalCommand
 import kotlin.system.exitProcess
 
 
@@ -7,6 +9,9 @@ import kotlin.system.exitProcess
  * Simple, builtin commands that don't fit having their own class
  */
 class Basics {
+    fun forceRun(command: String, arg: List<String>) {
+        runExternalCommand(command,arg)
+    }
     fun exit(statusCode: Int = 0) {
         println("Exiting...")
         exitProcess(statusCode)
@@ -16,8 +21,9 @@ class Basics {
         println(message)
     }
     fun type(command: String) {
-        val type = commands[command]?.type ?: "external"
-        println("$command is a ${if (type != "external") "builtin" else ""}$type shell command")
+        val type = commands[command]?.type ?:
+        if ((pathFiles[command] ?: "unknown") != "unknown") {"external"} else {"unknown"}
+        println("$command is a ${if (type != "unknown" && type != "external") "builtin" else ""}$type shell command")
     }
     fun help(command: String) {
 

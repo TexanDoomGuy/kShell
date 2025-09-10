@@ -1,6 +1,4 @@
 package commands
-
-
 data class Command(
     val description: String,
     val args: Map<String, String>,
@@ -65,6 +63,13 @@ val commands: Map<String, Command> = mapOf(
         args = mapOf("arg" to "command", "default" to "all"),
         action = { argv ->
             Basics().help(argv[0])
+        }
+    ),
+    "force" to Command(
+        description = "Force run an external command",
+        args = mapOf("arg" to "command"),
+        action = { argv ->
+            Basics().forceRun(argv[0],argv.drop(1))
         }
     )
 )
