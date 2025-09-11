@@ -55,6 +55,10 @@ fun runCommand(command: String) {
             commandInfo.action(listOf(defaultArg))
             return
         }
+        if argName = "no args" {
+            commandInfo.action(emptyList())
+            return
+        }
         println("Usage: $commandName ${argName ?: ""}".trim())
         return
     }

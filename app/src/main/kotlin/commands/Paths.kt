@@ -10,6 +10,10 @@ class Paths {
     fun pwd() {
         println(workingDir)
     }
+    fun rescan() {
+        resetWorkingDirFiles()
+    }
+
     fun ls(path: String) {
         if (path != "The current working directory") { // We're checking for that instead of the actual
             try {                                      // working dir because we want a readable help command.

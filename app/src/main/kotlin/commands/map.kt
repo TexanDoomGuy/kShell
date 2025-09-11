@@ -71,5 +71,9 @@ val commands: Map<String, Command> = mapOf(
         action = { argv ->
             Basics().forceRun(argv[0],argv.drop(1))
         }
+    ),
+    "rescan" to Command(
+        description = "Rescan files in the path directory",
+        args = mapOf("arg" to "no args")
     )
 )
